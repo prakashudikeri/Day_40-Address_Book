@@ -1,4 +1,7 @@
+const readline = require("readline-sync");
+
 class AddressBook{     
+        
         constructor(...params){
             this.firstName = params[0];
             this.lastName = params[1];
@@ -74,7 +77,49 @@ class AddressBook{
         }
 }
 
-try {
-    let personAddressData = new AddressBook("Prakash", "Udikeri", "Hasa89", "Belgaum", "Karnataka", 595959, 919123456780, "abc.xyz@gmail.com");
-    console.log(personAddressData.toString());
-} catch (e) {console.error(e);}
+    var addressBookArray = new Array();
+
+    function personAddressData () {
+        do {
+            console.log("Welcome to Address Book List");
+            console.log("1. Add New Contact");
+            console.log("2. Display Contact");
+            
+            console.log("Enter your choice: ")
+            var choice = Number(readline.question());
+        
+            switch(choice){
+                case 1: newContact();   break;
+                case 2: console.log(addressBookArray);   break;
+                default: console.log("Enter Valid Choice");  break;
+            }
+        } while (choice != 3)
+    }
+
+    function newContact() {
+        console.log("Enter the First Name :");
+            let firstName = readline.question();
+        console.log("Enter the Last Name :");
+            let lastName = readline.question();
+        console.log("Enter the Address :");
+            let address = readline.question();
+        console.log("Enter the City :");
+            let city = readline.question();
+        console.log("Enter the State :");
+            let state = readline.question();
+        console.log("Enter the Zip :");
+            let zip = readline.question();
+        console.log("Enter the Phone No :");
+            let phoneno = readline.question();
+        console.log("Enter the Email ID :");
+            let email = readline.question();
+            let addressBook = new AddressBook(firstName,lastName,address,city,state,zip,phoneno,email);
+        addressBookArray.push(addressBook);
+    }
+
+    try {
+        personAddressData();
+        console.log(personAddressData.toString());
+    } catch (e) {console.error(e);}
+
+    //let personAddressData = new AddressBook("Prakash", "Udikeri", "Hasa89", "Belgaum", "Karnataka", 595959, 919123456780, "abc.xyz@gmail.com");
