@@ -83,38 +83,70 @@ class AddressBook{
         do {
             console.log("Welcome to Address Book List");
             console.log("1. Add New Contact");
-            console.log("2. Display Contact");
+            console.log("2. Edit Contact");
+            console.log("3. Display Contact");
+            
             
             console.log("Enter your choice: ")
             var choice = Number(readline.question());
         
             switch(choice){
                 case 1: newContact();   break;
-                case 2: console.log(addressBookArray);   break;
+                case 2: editContact();  break;
+                case 3: console.log(addressBookArray);   break;
                 default: console.log("Enter Valid Choice");  break;
             }
-        } while (choice != 3)
+        } while (choice != 4)
     }
 
     function newContact() {
         console.log("Enter the First Name :");
             let firstName = readline.question();
-        console.log("Enter the Last Name :");
-            let lastName = readline.question();
-        console.log("Enter the Address :");
-            let address = readline.question();
-        console.log("Enter the City :");
-            let city = readline.question();
-        console.log("Enter the State :");
-            let state = readline.question();
-        console.log("Enter the Zip :");
-            let zip = readline.question();
-        console.log("Enter the Phone No :");
-            let phoneno = readline.question();
-        console.log("Enter the Email ID :");
-            let email = readline.question();
-            let addressBook = new AddressBook(firstName,lastName,address,city,state,zip,phoneno,email);
-        addressBookArray.push(addressBook);
+                if([...addressBookArray].filter(contact=>contact._firstName == firstName)
+                                        .reduce((present,firstName)=>present+=1,0)) {
+                    console.log("The Given Person Name is Already Available")
+                } else {
+                        console.log("Enter the Last Name :");
+                            let lastName = readline.question();
+                        console.log("Enter the Address :");
+                            let address = readline.question();
+                        console.log("Enter the City :");
+                            let city = readline.question();
+                        console.log("Enter the State :");
+                            let state = readline.question();
+                        console.log("Enter the Zip :");
+                            let zip = readline.question();
+                        console.log("Enter the Phone No :");
+                            let phoneno = readline.question();
+                        console.log("Enter the Email ID :");
+                            let email = readline.question();
+                            let addressBook = new AddressBook(firstName,lastName,address,city,state,zip,phoneno,email);
+                        addressBookArray.push(addressBook);
+                        }
+    }
+
+    function editContact() {
+            console.log("Enter the First Name :");
+            let firstName = readline.question();
+                for(let contact of addressBookArray) {
+                    if(contact._firstName == firstName){
+                        console.log("Contact with First Name Found.");
+                        console.log("Enter the Last Name :");
+                            contact._lastName = readline.question();
+                        console.log("Enter the Address :");
+                            contact._address = readline.question();
+                        console.log("Enter the City :");
+                            contact._city = readline.question();
+                        console.log("Enter the State :");
+                            contact._state = readline.question();
+                        console.log("Enter the Zip :");
+                            contact._zip = readline.question();
+                        console.log("Enter the Phone No :");
+                            contact._phoneno = readline.question();
+                        console.log("Enter the Email ID :");
+                            contact._email = readline.question();        
+                    } 
+                }
     }
 
     try {
